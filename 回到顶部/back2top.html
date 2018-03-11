@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button {
+            position: fixed;
+            right: 100px;
+            bottom:200px;
+            display: none;
+        }
+    </style>
+    <script src="../assets/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>123</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<p>456</p>
+<button onclick="scrollToTop();" id="back-top">back</button>
+<script>
+    var easeInQuad = function(t, b, _c, d) {
+        var c = _c - b;
+        return c * (t /= d) * t + b;
+    }
+
+    function scrollStep() {
+        if (window.pageYOffset === 0) {
+            clearInterval(window.intervalId);
+        }
+        window.scroll(0, easeInQuad(1, window.pageYOffset, 0, 6));
+    }
+
+    function scrollToTop(){
+        window.intervalId = setInterval(
+            scrollStep,
+        5);
+    }
+
+    $(window).on('scroll', controlButton);
+    $(window).on('load', controlButton);
+    function controlButton() {
+        const s = $(window).scrollTop();
+        this.minHeight = window.screen.height / 2;
+        if (s > this.minHeight) {
+            $('#back-top').show();
+        } else {
+            $('#back-top').hide();
+        }
+    }
+</script>
+</body>
+</html>
