@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="threeClick()">Click</button>
+
+    <script>
+        var count = 0;
+        function threeClick() {
+            if (++count === 3) {
+                alert(3);
+                count = 0;
+                return;
+            }
+            setTimeout(function () {
+                count = 0;
+            }, 500);
+        }
+    </script>
+</body>
+</html>
