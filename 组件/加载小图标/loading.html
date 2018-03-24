@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .spinner {
+            position: fixed;
+            top: 50%;
+            right: 50%;
+            transform: translate(-50%,-50%);
+        }
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .spinner-icon {
+            border: 2px solid transparent;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            border-top-color: #29d;
+            border-left-color: #29d;
+            animation: spinner 400ms linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="spinner">
+        <div class="spinner-icon"></div>
+    </div>
+</body>
+</html>
