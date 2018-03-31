@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            margin: 50px auto;
+            position: relative;
+            border: 1px solid #000;
+            width: 600px;
+            height: 500px;
+            background-color: darkgrey;
+        }
+
+        #text {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <p id="text">文字</p>
+</div>
+<script type="text/javascript">
+    (function () {
+        var p = document.querySelector('#text');
+        var wrap = document.querySelector('#wrap');
+        var maxX = p.offsetParent.clientWidth - p.offsetWidth;
+        var maxY = p.offsetParent.clientHeight - p.offsetHeight;
+        console.log('wrap.client...', wrap.clientWidth);
+        console.log('p.offsetParent.clientWidth:',p.offsetParent.clientWidth, 'p.offsetWidth:',p.offsetWidth);
+        console.log('p.offsetParent.clientHeight:',p.offsetParent.clientHeight, 'p.offsetHeight:',p.offsetHeight);
+        p.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            var start = {x: e.clientX, y: e.clientY};
+            var elOffset = {x: p.offsetLeft, y: p.offsetTop};
+            document.addEventListener('mousemove', move);
+            document.addEventListener('mouseup', end);
+
+            function move(e) {
+                var dis = {x: e.clientX - start.x, y: e.clientY - start.y};
+                var x = dis.x + elOffset.x;
+                var y = dis.y + elOffset.y;
+                /* 左侧磁性吸附 */
+                x = x < 0 ? 0 : (x > maxX ? maxX : x);
+
+                y = y < 0 ? 0 : (y > maxY ? maxY : y);
+                //console.log('move...',x);
+                p.style.transition = "";
+                p.style.left = x + "px";
+                p.style.top = y + "px";
+                //p.style.transform = "translate(" + x + "px," + y + "px" + ")";
+            }
+
+            function end(e) {
+                document.removeEventListener('mousemove', move);
+                document.removeEventListener('mouseup', end);
+                var dis = {x: e.clientX - start.x, y: e.clientY - start.y};
+                var x = dis.x + elOffset.x;
+                var y = dis.y + elOffset.y;
+                var left =
+                    /* 左侧磁性吸附 */
+                    x = x < 100 ? 0 : (x > maxX ? maxX : x);
+
+                if (x > maxX - 100) {
+                    x = maxX;
+                }
+                /* 上边磁性吸附 */
+                y = y < 100 ? 0 : (y > maxY ? maxY : y);
+                if (y > maxY - 100) {
+                    y = maxY;
+                }
+                console.log('end...',x, 'e.clientX..',e.clientX,'endY...',y, 'e.clientY..',e.clientY);
+                p.style.left = x + "px";
+                p.style.top = y + "px";
+                p.style.transition = "all 0.5s";
+                //p.style.transform = "translate(" + x + "px," + y + "px" + ")";
+            }
+        });
+    })();
+</script>
+</body>
+</html>
