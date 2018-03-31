@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .dialog {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dialog .dialog-content {
+            width: 50%;
+            border: 1px solid gray;
+        }
+        /*.dialog.dialog--open .mask{
+            opacity: 1;
+        }*/
+        .mask {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background-color: black;
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 10;
+            display: none;
+        }
+        .dialog-content {
+            opacity: 0;
+            z-index: 50;
+            background-color: #fff;
+        }
+        .dialog.dialog--open .dialog-content {
+            animate-name: animated-open;
+            -webkit-animation-name: animated-open;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.8,0,0.2,1);
+        }
+        .dialog.dialog--close .dialog-content {
+            animate-name: animated-close;
+            -webkit-animation-name: animated-close;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.8,0,0.2,1);
+        }
+        @keyframes animated-open {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -20px,0);
+                transform: translate3d(0, -20px, 0);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 0 ,0);
+                transform: translate3d(0, 0 ,0);
+            }
+        }
+        @keyframes animated-close {
+            0% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 0px,0);
+                transform: translate3d(0, 0px, 0);
+            }
+            100% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -20px ,0);
+                transform: translate3d(0, -20px ,0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="open">打开</button>
+    <div class="dialog" id="dialog">
+        <div class="mask"></div>
+        <div class="dialog-content">
+            <div class="dialog-head">head</div>
+            <div class="dialog-body">content</div>
+            <div class="dialog-foot">
+                <button id="yes">确认</button>
+                <button id="no">取消</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var dialog = document.getElementById('dialog');
+        var mask = document.querySelector('.mask');
+        document.getElementById('open').addEventListener('click', function () {
+            dialog.className = 'dialog dialog--open';
+            mask.style.display = 'block';
+        });
+        document.getElementById('yes').addEventListener('click', function () {
+            dialog.className = 'dialog dialog--close';
+            setTimeout(()=>{
+                dialog.className = 'dialog';
+                mask.style.display = 'none';
+            },500);
+
+        });
+        document.getElementById('no').addEventListener('click', function () {
+            dialog.className = 'dialog dialog--close';
+            setTimeout(()=>{
+                dialog.className = 'dialog';
+                mask.style.display = 'none';
+            },500);
+        });
+    </script>
+</body>
+</html>
