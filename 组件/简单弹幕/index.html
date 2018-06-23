@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../assets/jquery-1.11.2.min.js"></script>
+    <script src="./barrager.js"></script>
+    <style>
+        .wrap {
+            width: 100%;
+            height: 300px;
+            background-color: black;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .barrage {
+            position: absolute;
+            bottom: 70px;
+            right: -500px;
+            display: inline-block;
+            width: 500px;
+            z-index: 99999
+        }
+
+        .barrage span {
+            margin-right: 2px;
+            font-size: 14px;
+            color: #fff;
+            line-height: 40px;
+            margin-left: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+</div>
+<script>
+    var data = [
+        {
+            info: '第一条弹幕',
+            speed: 15/*,
+			range: [100,150, 200]*/
+        },
+        {
+            info: '第二条弹幕',
+            speed: 15/*,
+			range: [100,150, 200]*/
+        },
+        {
+            info: '第三条弹幕',
+            speed: 15/*,
+			range: [100,150,200]*/
+        }
+    ];
+    var looper_time = 3 * 1000;
+    var items = data;
+    //弹幕总数
+    var total = data.length;
+    //是否首次执行
+    var run_once = true;
+    //弹幕索引
+    var index = 0;
+    //先执行一次
+    barrager();
+
+    function barrager() {
+        if (run_once) {
+            //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+            looper = setInterval(barrager, looper_time);
+            run_once = false;
+        }
+        //发布一个弹幕
+        $('.wrap').barrager(items[index]);
+        //索引自增
+        index++;
+        //所有弹幕发布完毕，清除计时器。
+        if (index == total) {
+
+            clearInterval(looper);
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
