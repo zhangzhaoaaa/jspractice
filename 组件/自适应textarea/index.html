@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../assets/jquery-1.11.2.min.js"></script>
+    <script>
+        (function($) {
+
+            $.fn.autoTextarea = function(settings) {
+
+                var options = $.extend({
+                    padding: 0
+                }, settings);
+
+                return this.each(function() {
+
+                    // Derived from: http://stackoverflow.com/a/5346855
+
+                    var self = this;
+
+                    function resize() {
+                        self.style.height = 'auto';
+                        self.style.height = (self.scrollHeight + options.padding) + 'px';
+                    }
+                    // 0-timeout to get the already changed text
+                    function delayedResize() {
+                        window.setTimeout(resize, 0);
+                    }
+
+                    $(this).bind('change', resize);
+                    $(this).bind('cut paste drop keydown', delayedResize);
+
+                    resize();
+
+                });
+
+            }
+
+        })(jQuery);
+
+        function AutoTextarea(opt) {
+            var opt = opt || {},
+                self;
+            if (opt.id) {
+                self = document.querySelector('#' + opt.id);
+            } else {
+                throw new Error('请确定你的textarea的id');
+            }
+
+            function resize() {
+                self.style.height = 'auto';
+                self.style.height = (self.scrollHeight + opt.padding) + 'px';
+            }
+
+            function delayedResize() {
+                window.setTimeout(resize, 0);
+            }
+
+            self.addEventListener('change', resize);
+            self.addEventListener('keydown', delayedResize);
+            self.addEventListener('cut', delayedResize);
+            self.addEventListener('paste', delayedResize);
+            self.addEventListener('drop', delayedResize);
+
+            resize();
+        }
+    </script>
+    <style>
+        .abc {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <textarea name="" id="txt" cols="30" rows="10"></textarea>
+    <div>
+        <div class="abc">aabcccc</div>
+    </div>
+</div>
+<script>
+    /*$(function() {
+        $('textarea').autoTextarea({padding:2});
+    });*/
+    AutoTextarea({
+        id: 'txt',
+        padding: 10
+    })
+</script>
+</body>
+</html>
