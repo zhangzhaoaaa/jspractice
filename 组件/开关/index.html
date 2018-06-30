@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .switch {
+            position: relative;
+            width: 70px;
+            height: 30px;
+            background-color: #ffffff;
+            margin: 10px auto;
+            border-radius: 40px;
+            border: 1px solid #d8d8d8;
+        }
+        .core:before {
+            content: "";
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 40px;
+            height: 20px;
+            width: 20px;
+            top: 5px;
+            left: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        input {
+            display: none;
+            /*visibility: hidden;*/
+            width: 70px;
+            height: 30px;
+            /*left: 20px;
+            position: relative;*/
+        }
+        input:checked ~ .core:before{
+            left: 40px;
+        }
+        .bg {
+            width: 70px;
+            height: 30px;
+            background-color: red;
+            border-color: red;
+            border-radius: 40px;
+        }
+        .bg:after {
+            content: "关";
+            position: absolute;
+            right: 12px;
+            top: 5px;
+            font-size: 14px;
+        }
+        input:checked ~ .bg {
+            background-color: rgb(19, 206, 102);
+            border-color: rgb(19, 206, 102);
+        }
+        input:checked ~ .bg:after {
+            content: "开";
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="switch">
+    <label for="ck">
+        <input type="checkbox" id="ck">
+        <span class="core"></span>
+        <div class="bg"></div>
+    </label>
+</div>
+</body>
+</html>
