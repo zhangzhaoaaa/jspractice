@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrap {
+            width: 100%;
+            height: 400px;
+            background-color: black;
+        }
+        .info {
+            color: #ffffff;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            opacity: 1;
+            z-index: -1;
+            transition: all 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+</div>
+<script>
+    function ShowMsg(j, msg) {
+        let div = document.createElement('div');
+        div.className = 'info' + ' i' + j;
+        div.innerText = msg;
+        document.querySelector('.wrap').appendChild(div);
+        setTimeout(()=>{
+            var style = document.querySelector('.i' + j).style;
+            style.opacity = 0;
+            style.top = '20px';
+            style.zIndex = 10;
+            setTimeout(function ax(a){
+                a.remove();
+            }, 200 * j + 1500, document.querySelector('.i' + j));
+        }, 200 * j);
+    }
+    let count = 0;
+    var data = [
+        '这就是世界波',
+        '这就是你的球',
+        '小秘密',
+        '大抢救器'
+    ];
+    loop();
+    function loop() {
+        ShowMsg(count, data[count]);
+        if (count === 0) {
+            window.interval = setInterval(loop, 1000);
+        }
+        if (count === 3) {
+            clearInterval(window.interval);
+            count = -1;
+            setTimeout(()=>{
+                loop();
+            }, 1500);
+        }
+        count++;
+    }
+</script>
+</body>
+</html>
