@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrap {
+            margin: 10px auto;
+            width: 200px;
+            height: 108px;
+            border: 1px solid;
+            overflow: hidden;
+            position: relative;
+        }
+        .item {
+            margin-bottom: 15px;
+            display: flex;
+            padding: 5px;
+            line-height: 1;
+            justify-content: center;
+            background-color: #00c9fe;
+            transition: all 1.2s ease-in-out;
+        }
+    </style>
+    <script src="../assets/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="list">
+        <div class="item">abc0</div>
+        <div class="item">abc1</div>
+        <div class="item">abc2</div>
+        <div class="item">abc3</div>
+        <div class="item">abc4</div>
+        <div class="item">abc5</div>
+        <div class="item">abc6</div>
+        <div class="item">abc7</div>
+        <div class="item">abc8</div>
+        <div class="item">abc9</div>
+    </div>
+
+</div>
+<script>
+    function autoScroll(obj){
+        var $list  =$(".list");
+        var mt = - ($list.find('div:first')[0].clientHeight + 15) + 'px'; // 15是margin-bottom
+        $list.animate({
+            marginTop: mt
+        },600,function(){
+            $list.css({marginTop : "0px"}).children().first().appendTo($(".list"));
+        })
+    }
+
+    $(function(){
+
+        setInterval('autoScroll(".wrap")',2000);
+        console.log(666);
+
+
+    })
+</script>
+</script>
+</body>
+</html>

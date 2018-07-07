@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function formatDate(value, format) {
+        let curDate = new Date(value);
+        const o = {
+            'M+': curDate.getMonth() + 1, // 月份
+            'd+': curDate.getDate(), // 日
+            'h+': curDate.getHours(), // 小时
+            'm+': curDate.getMinutes(), // 分
+            's+': curDate.getSeconds(), // 秒
+            'q+': Math.floor((curDate.getMonth() + 3) / 3), // 季度
+            'S': curDate.getMilliseconds() // 毫秒
+        };
+        if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (curDate.getFullYear() + '').substr(4 - RegExp.$1.length));
+        for (let k in o) {
+            if (new RegExp('(' + k + ')').test(format)) format = format.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+        }
+        return format;
+    };
+    /* 1）一分钟内的显示，刚刚发布
+    2）1个小时以内发表的消息，显示发表的分钟数，如“20分钟前”；
+      3）在24小时以内，发表的信息，显示具体小时数，如“15小时前”；
+      4）大于1天小于30天的，显示 **天前
+    5）超过30天前，显示具体年/月/日*/
+    function TimeAgo(time) {
+        var currentTime = new Date();
+        var fromTime = new Date(time);
+        var diff = currentTime.getTime() - parseInt(time);
+        var oneMinute = 60 * 1000;
+        var oneHour = 60 * oneMinute;
+        var oneDay = 24 * oneHour;
+        var thirtyDays = 30 * oneDay;
+        if (diff <= oneMinute) {
+            return '刚刚';
+        } else if (diff <= oneHour) {
+            // return currentTime.getMinutes() + '分钟前';
+            return Math.floor(diff / oneMinute)+ '分钟前';
+        } else if (diff <= oneDay) {
+            // return currentTime.getHours() + '小时前';
+            return Math.floor(diff/ oneHour) + '小时前';
+        } else if (diff > oneDay && diff <= thirtyDays) {
+            // return (currentTime.getDate() - fromTime.getDate()) + '天前';
+            return Math.floor(diff/ oneDay) + '天前';
+        } else if (diff > thirtyDays) {
+            return formatDate(fromTime, 'yyyy-MM-dd hh:mm:ss');
+        }
+
+    }
+
+    //console.log(TimeAgo(1530782937558));
+    // 1530785694572
+    console.log(TimeAgo(1530782937558));
+</script>
+</body>
+</html>
