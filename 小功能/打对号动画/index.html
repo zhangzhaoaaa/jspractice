@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../组件/assets/jquery-1.11.2.min.js"></script>
+    <style>
+        .wrap {
+            width: 16px;
+            margin: 10px auto;
+            position: relative;
+
+        }
+        .i {
+            position: relative;
+            overflow: hidden;
+        }
+        .d {
+            width: 16px;
+            height: 16px;
+        }
+        .j {
+            position: absolute;
+            top: 5px;
+            left: 4px;
+            width: 8px;
+            height: 6px;
+            overflow: hidden;
+        }
+        .j img {
+            width: 8px;
+            height: 6px;
+            vertical-align: top;
+        }
+        .mask {
+            width: 16px;
+            height: 6px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #ffffff;
+        }
+        .rotate {
+            transform: rotate(-360deg);
+            transition: 0.6s linear;
+        }
+        .translate {
+            transform: translateX(12px);
+            transition: transform 2s ease-in-out 0.6s;
+        }
+        .r {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="i">
+        <img src="rotate1.jpeg" alt="" class="d d1">
+        <img src="rotate.jpeg" alt="" class="d r">
+        <div class="j">
+            <img src="rotate2.jpeg" alt="" class="d2">
+            <div class="mask translate"></div>
+        </div>
+    </div>
+
+</div>
+<button onclick="show()">test</button>
+<script>
+    function show() {
+        document.querySelector('.d1').style.display = 'none';
+        document.querySelector('.d2').style.display = 'none';
+        document.querySelector('.r').style.display = 'block';
+        setTimeout(()=>{
+            document.querySelector('.r').className = 'd r rotate';
+        },0);
+        setTimeout(()=>{
+            document.querySelector('.d1').style.display = 'block';
+            document.querySelector('.d2').style.display = 'block';
+            document.querySelector('.r').style.display = 'none';
+            document.querySelector('.mask').style.display = 'block';
+            setTimeout(()=>{
+                $('.mask').addClass('translate');
+            },100);
+        }, 1200);
+    }
+</script>
+</body>
+</html>

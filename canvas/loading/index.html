@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<canvas id="ctx"></canvas>
+<script>
+    var cvs = document.getElementById('ctx');
+    var w = cvs.width = 300;
+    var h = cvs.height = 300;
+    var context = cvs.getContext('2d');
+
+    var r = w / 2;
+    var lineWidth = 5;
+    var cr = r - 4 * lineWidth;
+    var startAngle = - (1/2) * Math.PI;
+    var endAngle = startAngle + 2 * Math.PI;
+    var rad = 1 * (Math.PI / 180);
+    var accAngle = startAngle;
+
+    function render() {
+        if (accAngle >= endAngle) {
+            return;
+        } else if (accAngle + rad > endAngle) {
+            accAngle = endAngle;
+        } else {
+            accAngle += rad;
+        }
+
+        context.clearRect(0 ,0, w, h);
+
+        context.beginPath();
+        context.strokeStyle = '#1c86d1';
+        context.lineWidth = 5;
+        context.arc(r, r, cr, startAngle, accAngle);
+        context.stroke();
+        context.closePath();
+
+        context.font= 35 + 'px Microsoft Yahei';
+        context.fillStyle = '#1c86d1';
+        context.textAlign = 'center';
+        //context.fillText(Math.round((accAngle - startAngle) / (endAngle - startAngle)) * 100 + '%', r, r);
+        context.fillText( Math.round((accAngle -  startAngle) / (endAngle - startAngle) * 100) + '%', r, r + 35 / 2);
+
+        requestAnimationFrame(render);
+    }
+
+    render();
+</script>
+</body>
+</html>
